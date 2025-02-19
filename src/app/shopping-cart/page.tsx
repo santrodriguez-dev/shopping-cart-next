@@ -1,8 +1,4 @@
-// import "../globals.css";
-import { RelatedProducts } from "@/components/RelatedProducts";
-import { OrderSummary } from "@/components/OrderSummary";
-import { CartItem } from "@/components/CartItem";
-import { VoucherForm } from "@/components/VoucherForm";
+import { OrderSummary, RelatedProducts, ShoppingCartListItems, VoucherForm } from "@/components";
 
 export default function ShoppingCartPage() {
   return (
@@ -13,13 +9,7 @@ export default function ShoppingCartPage() {
         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
           <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
             <div className="space-y-6">
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
+              <ShoppingCartListItems />
             </div>
             <RelatedProducts />
           </div>
