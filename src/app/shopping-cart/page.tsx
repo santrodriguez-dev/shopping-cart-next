@@ -1,5 +1,5 @@
+// import "../globals.css";
 import { RelatedProducts } from "@/components/RelatedProducts";
-import "../globals.css";
 import { OrderSummary } from "@/components/OrderSummary";
 import { CartItem } from "@/components/CartItem";
 import { VoucherForm } from "@/components/VoucherForm";
