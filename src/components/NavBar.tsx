@@ -20,7 +20,7 @@ export const NavBar = () => {
               <li>
                 <Link href={'/'} className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">Home</Link>
               </li>
-              <li className="shrink-0">
+              {/* <li className="shrink-0">
                 <a href="#" title="" className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">
                   Best Sellers
                 </a>
@@ -39,7 +39,7 @@ export const NavBar = () => {
                 <a href="#" title="" className="text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">
                   Sell
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 

@@ -3,7 +3,7 @@ import { Breadcrumbs } from "./Breadcrumbs"
 import { ProductCard } from "./ProductCard"
 
 export const ProductList = async () => {
-  const products = await getAllProducts()
+  const products = await getAllProducts(0, 30)
 
   return (
     <section className="py-8 antialiased md:py-12">

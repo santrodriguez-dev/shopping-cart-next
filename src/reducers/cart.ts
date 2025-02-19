@@ -51,7 +51,7 @@ function cartReducer(state: CartState, action: CartActions): CartState {
       if (productIdx > -1) {
         const originalProduct = state.products.at(productIdx)!
         const newQuantity = originalProduct.quantity += 1
-        const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: newQuantity })
+        const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: Math.min(newQuantity, 20) })
         return {
           ...state,
           products: resultProducts
@@ -74,9 +74,7 @@ function cartReducer(state: CartState, action: CartActions): CartState {
       if (!quantityToAdd || quantityToAdd === 0) return state
       const productIdx = state.products.findIndex(p => p.id === productId)
       if (productIdx < 0) return state
-
       const originalProduct = state.products.at(productIdx)!
-
       const newQuantity = originalProduct.quantity + quantityToAdd
 
       if (newQuantity <= 0) {
@@ -86,7 +84,8 @@ function cartReducer(state: CartState, action: CartActions): CartState {
         }
       }
 
-      const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: newQuantity })
+
+      const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: Math.min(newQuantity, 20) })
       return {
         ...state,
         products: resultProducts
