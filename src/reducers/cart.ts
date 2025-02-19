@@ -1,4 +1,5 @@
 import { ProductCartItem } from "@/interfaces/Cart";
+import { ProductItem } from "@/interfaces/Product";
 
 type CartState = {
   products: ProductCartItem[]
@@ -21,7 +22,7 @@ enum CartActionsTypesEnum {
 
 interface AddProductAction {
   type: CartActionsTypesEnum.ADD_PRODUCT
-  payload: ProductCartItem
+  payload: ProductItem
 }
 
 interface RemoveProductAction {
@@ -46,11 +47,19 @@ function cartReducer(state: CartState, action: CartActions): CartState {
 
   switch (type) {
     case CartActionsTypesEnum.ADD_PRODUCT: {
-      if (state.products.findIndex(product => product.id === payload.id) > -1) return state
-      const newQuantity = payload.quantity ?? 1
+      const productIdx = state.products.findIndex(product => product.id === payload.id)
+      if (productIdx > -1) {
+        const originalProduct = state.products.at(productIdx)!
+        const newQuantity = originalProduct.quantity += 1
+        const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: newQuantity })
+        return {
+          ...state,
+          products: resultProducts
+        }
+      }
       return {
         ...state,
-        products: [...state.products, { ...payload, quantity: newQuantity }]
+        products: [...state.products, { ...payload, quantity: 1 }]
       }
     }
 

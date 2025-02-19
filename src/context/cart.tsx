@@ -27,7 +27,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [state, dispatch] = useReducer(cartReducer, cartInitialState)
 
-  const addProduct = (product: ProductCartItem) => {
+  const addProduct = (product: ProductItem) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT, payload: product })
   }
 
