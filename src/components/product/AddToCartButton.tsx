@@ -1,8 +1,8 @@
 'use client'
 
+import { CartContext } from "@/context/cart";
 import { ProductItem } from "@/interfaces/Product"
 import { use } from "react";
-import { CartContext, CartProvider } from "../context/cart";
 
 export function AddToCartButton({ product }: { product: ProductItem }) {
 
