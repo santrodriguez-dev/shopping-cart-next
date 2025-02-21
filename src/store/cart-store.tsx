@@ -13,6 +13,7 @@ export type CartState = {
   clearCart: () => void
   addProductQuantity: (productId: number, quantityToAdd: number) => void
   getTotalItems: () => number
+  getProductById: (productId: number) => ProductCartItem | undefined
 }
 
 const getCartFromLocalStorage = () => {
@@ -31,6 +32,7 @@ const cartInitialState: CartState = {
   clearCart: () => { },
   addProductQuantity: () => { },
   getTotalItems: () => 0,
+  getProductById: () => undefined,
   products: getCartFromLocalStorage(),
   savings: 2
 }
@@ -63,6 +65,10 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getTotalItems = () => products.reduce((acc, product) => acc + product.quantity, 0)
 
+  const getProductById = (productId: number) => {
+    return products.find(product => product.id === productId)
+  }
+
 
   return (
     <CartContext value={{
@@ -73,6 +79,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       products,
       addProductQuantity,
       getTotalItems,
+      getProductById
     }}>
       {children}
     </CartContext>

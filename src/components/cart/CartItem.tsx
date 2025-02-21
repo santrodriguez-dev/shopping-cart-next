@@ -1,9 +1,9 @@
 import { ProductCartItem } from "@/interfaces/Cart"
 import Image from "next/image"
 import Link from "next/link"
-import { CartQuantityButtons } from "./CartQuantityButtons"
 import { CartContext } from "@/store/cart-store"
 import { use } from "react"
+import { QuantityButtons } from "./QuantityButtons"
 
 export const CartItem = ({ product }: { product: ProductCartItem }) => {
 
@@ -19,7 +19,7 @@ export const CartItem = ({ product }: { product: ProductCartItem }) => {
 
         <label htmlFor="counter-input" className="sr-only">Choose quantity:</label>
         <div className="flex items-center justify-between md:order-3 md:justify-end">
-          <CartQuantityButtons product={product} />
+          <QuantityButtons id={product.id} quantity={product.quantity} />
           <div className="text-end md:order-4 md:w-32">
             <p className="text-base font-bold text-gray-900 dark:text-white">${product.price * product.quantity}</p>
           </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import { ProductItem } from "@/interfaces/Product"
-import { ImageCarousel } from "./ImageCarousel"
 import Image from 'next/image'
 import { CartContext } from "@/store/cart-store"
 import { use, useMemo, useState } from "react"
@@ -12,13 +11,9 @@ export const ProductDetail = ({ product }: { product: ProductItem }) => {
 
   const { addProduct, products: productsCart, addProductQuantity } = use(CartContext);
 
-  const [productQuantity] = useState(0)
-
   const productCart = useMemo(() => {
     return productsCart.find((item) => item.id === product.id)
   }, [productsCart, product.id])
-
-
 
   return (
     <section className="py-8 md:py-16 antialiased">
