@@ -4,7 +4,6 @@ export * from './cart/CartQuantityButtons';
 export * from './cart/MyCartNavBarButton';
 export * from './cart/OrderSummary';
 export * from './cart/RelatedProducts';
-export * from './cart/ShoppingCartListItems';
 export * from './cart/VoucherForm';
 export * from './product/AddToCartButton';
 export * from './product/ImageCarousel';

@@ -81,12 +81,7 @@ function cartReducer(state: CartState, action: CartActions): CartState {
       const originalProduct = state.products.at(productIdx)!
       const newQuantity = originalProduct.quantity + quantityToAdd
 
-      if (newQuantity <= 0) {
-        return {
-          ...state,
-          products: state.products.filter(p => p.id !== payload.productId)
-        }
-      }
+      if (newQuantity < 1) return state // minimum quantity is 1
 
       const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: Math.min(newQuantity, 20) })
       return {

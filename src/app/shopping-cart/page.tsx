@@ -1,12 +1,19 @@
 'use client';
 
-import { OrderSummary, RelatedProducts, ShoppingCartListItems, VoucherForm } from "@/components";
+import { CartItem, OrderSummary, RelatedProducts, VoucherForm } from "@/components";
 import { CartContext } from "@/store";
 import Link from "next/link";
-import { use } from "react";
+import { use, useLayoutEffect, useState } from "react";
 
 export default function ShoppingCartPage() {
   const { clearCart, products } = use(CartContext);
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useLayoutEffect(() => setIsLoaded(true), [])
+
+  if (!isLoaded) {
+    return <p>Loading...</p>
+  }
 
   return (
     <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
@@ -35,11 +42,13 @@ export default function ShoppingCartPage() {
           </div>
         )}
 
-        {products.length > 0 && (
+        {products.length > 0 && isLoaded && (
           <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
             <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
               <div className="space-y-6">
-                <ShoppingCartListItems />
+                {products.map(product => (
+                  <CartItem key={product.id} product={product} />
+                ))}
               </div>
               <RelatedProducts />
             </div>
