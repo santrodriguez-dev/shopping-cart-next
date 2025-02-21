@@ -12,11 +12,13 @@ export type CartState = {
   removeProduct: (productId: number) => void
   clearCart: () => void
   addProductQuantity: (productId: number, quantityToAdd: number) => void
+  getTotalItems: () => number
 }
 
 const getCartFromLocalStorage = () => {
+  if (typeof window === 'undefined') return []
   const cart = localStorage.getItem('cart')
-  return JSON.parse(cart || '[]')
+  return JSON.parse(cart || '[]') as ProductCartItem[]
 }
 
 const updateCartLocalStorage = (products: ProductCartItem[]) => {
@@ -28,6 +30,7 @@ const cartInitialState: CartState = {
   removeProduct: () => { },
   clearCart: () => { },
   addProductQuantity: () => { },
+  getTotalItems: () => 0,
   products: getCartFromLocalStorage(),
   savings: 2
 }
@@ -58,6 +61,8 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT_QUANTITY, payload: { quantityToAdd, productId } })
   }
 
+  const getTotalItems = () => products.reduce((acc, product) => acc + product.quantity, 0)
+
 
   return (
     <CartContext value={{
@@ -66,7 +71,8 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       removeProduct,
       clearCart,
       products,
-      addProductQuantity
+      addProductQuantity,
+      getTotalItems,
     }}>
       {children}
     </CartContext>

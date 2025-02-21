@@ -4,11 +4,15 @@ import Link from "next/link";
 import { MyCartNavBarButton } from "../cart/MyCartNavBarButton";
 import { useUIStore } from "@/store";
 import { SHOP_CATEGORIES } from "@/constants";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export const NavBar = () => {
 
+  const [isLoaded, setIsLoaded] = useState(false)
   const toggleSideMenu = useUIStore(state => state.toggleSideMenu)
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
 
   return (
     <nav className="bg-white dark:bg-gray-800 antialiased">
@@ -35,7 +39,7 @@ export const NavBar = () => {
           </ul>
 
           <div className="flex items-center lg:space-x-2">
-            <MyCartNavBarButton />
+            {isLoaded && <MyCartNavBarButton />}
 
             <button onClick={toggleSideMenu} id="userDropdownButton1" data-dropdown-toggle="userDropdown1" type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
               <svg className="w-5 h-5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

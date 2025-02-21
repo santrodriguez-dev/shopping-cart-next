@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css"
 import { NavBar, Sidebar } from "@/components";
-import { CartProvider } from "@/store/cart-store";
+import { CartProvider } from "@/store";
 
 export const metadata: Metadata = {
   title: 'Shop Store',

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export default function Home() {
+
   return (
     <section className="mt-72">
       <div className="mx-auto grid max-w-screen-xl px-4 pb-8 md:grid-cols-12 lg:gap-12 lg:pb-16 xl:gap-0">

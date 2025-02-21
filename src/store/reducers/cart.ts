@@ -42,7 +42,6 @@ type CartActions = AddProductAction | RemoveProductAction | ClearCartAction | Ad
 function cartReducer(state: CartState, action: CartActions): CartState {
   const { type, payload } = action;
 
-  console.log('cartReducer', type)
   switch (type) {
     case CartActionsTypesEnum.ADD_PRODUCT: {
       const productIdx = state.products.findIndex(product => product.id === payload.id)

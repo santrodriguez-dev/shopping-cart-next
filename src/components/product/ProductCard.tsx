@@ -17,14 +17,14 @@ export const ProductCard = ({ product }: { product: ProductItem }) => {
       <div className="h-56 w-full overflow-hidden">
         <Link href={`/product/${product.id}`}>
           <Image
-            priority={false}
+            priority={true}
             onMouseEnter={() => image2 && setDisplayImage(image2)}
             onMouseLeave={() => setDisplayImage(image1)}
             src={displayImage}
             alt={product.title}
             width={200}
             height={200}
-            className="h-full object-cover m-auto" />
+            className="h-full w-auto object-cover m-auto" />
 
         </Link>
       </div>
