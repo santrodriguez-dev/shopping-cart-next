@@ -1,7 +1,12 @@
 import { ProductItem } from './Product.d'
 
-interface ProductCartItem extends ProductItem {
+interface ProductCartItem {
+  id: number
   quantity: number
+  title: string
+  price: number
+  image?: string
+  description: string
 }
 
 export { ProductCartItem }

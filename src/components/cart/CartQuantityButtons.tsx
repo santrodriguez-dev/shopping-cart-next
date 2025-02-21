@@ -1,6 +1,6 @@
 'use client'
 
-import { CartContext } from "@/context/cart";
+import { CartContext } from "@/store/cart-store";
 import { ProductCartItem } from "@/interfaces/Cart"
 import { use } from "react";
 

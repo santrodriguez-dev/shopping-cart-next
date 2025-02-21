@@ -6,8 +6,6 @@ import { useUIStore } from "@/store";
 import { SHOP_CATEGORIES } from "@/constants";
 import Image from "next/image";
 
-import shopLogo from '@/../public/one_stop_logo.png'
-
 export const NavBar = () => {
 
   const toggleSideMenu = useUIStore(state => state.toggleSideMenu)

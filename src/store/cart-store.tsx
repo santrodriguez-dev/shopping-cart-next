@@ -1,11 +1,12 @@
 'use client'
 
 import { ProductItem } from "@/interfaces/Product";
-import { createContext, useReducer } from "react";
-import { cartReducer, CartActionsTypesEnum, cartInitialState } from "@/reducers/cart";
+import { createContext, useEffect, useReducer } from "react";
+import { cartReducer, CartActionsTypesEnum } from "@/store/reducers/cart";
 import { ProductCartItem } from "@/interfaces/Cart";
 
-type CartContext = {
+export type CartState = {
+  savings: number
   products: ProductCartItem[]
   addProduct: (product: ProductItem) => void
   removeProduct: (productId: number) => void
@@ -13,19 +14,35 @@ type CartContext = {
   addProductQuantity: (productId: number, quantityToAdd: number) => void
 }
 
-const initialState: CartContext = {
+const cartInitialState: CartState = {
   addProduct: () => { },
   removeProduct: () => { },
   clearCart: () => { },
   addProductQuantity: () => { },
-  products: []
+  products: [],
+  savings: 2
 }
 
-const CartContext = createContext<CartContext>(initialState);
+const CartContext = createContext<CartState>(cartInitialState);
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [state, dispatch] = useReducer(cartReducer, cartInitialState)
+  const { products, savings } = state
+
+  useEffect(() => {
+    const cart = localStorage.getItem('cart')
+    const parsedCart = JSON.parse(cart || '[]')
+    if (parsedCart.length > 0) {
+      dispatch({ type: CartActionsTypesEnum.SET_CART, payload: parsedCart })
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(state.products))
+  }, [products])
+
+
 
   const addProduct = (product: ProductItem) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT, payload: product })
@@ -43,12 +60,14 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT_QUANTITY, payload: { quantityToAdd, productId } })
   }
 
+
   return (
     <CartContext value={{
+      savings,
       addProduct,
       removeProduct,
       clearCart,
-      products: state.products,
+      products,
       addProductQuantity
     }}>
       {children}

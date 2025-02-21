@@ -2,7 +2,7 @@ import { ProductCartItem } from "@/interfaces/Cart"
 import Image from "next/image"
 import Link from "next/link"
 import { CartQuantityButtons } from "./CartQuantityButtons"
-import { CartContext } from "@/context/cart"
+import { CartContext } from "@/store/cart-store"
 import { use } from "react"
 
 export const CartItem = ({ product }: { product: ProductCartItem }) => {
@@ -14,7 +14,7 @@ export const CartItem = ({ product }: { product: ProductCartItem }) => {
     <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
         <Link href={'/'} className="shrink-0 md:order-1">
-          <Image src={product.images.at(0)!} width={80} height={80} alt={product.title} />
+          <Image src={product.image!} width={80} height={80} alt={product.title} />
         </Link>
 
         <label htmlFor="counter-input" className="sr-only">Choose quantity:</label>

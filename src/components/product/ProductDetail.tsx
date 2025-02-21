@@ -3,7 +3,7 @@
 import { ProductItem } from "@/interfaces/Product"
 import { ImageCarousel } from "./ImageCarousel"
 import Image from 'next/image'
-import { CartContext } from "@/context/cart"
+import { CartContext } from "@/store/cart-store"
 import { use, useMemo, useState } from "react"
 
 export const ProductDetail = ({ product }: { product: ProductItem }) => {

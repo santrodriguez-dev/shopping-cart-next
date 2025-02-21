@@ -1,6 +1,6 @@
 'use client'
 
-import { CartContext } from "@/context/cart";
+import { CartContext } from "@/store/cart-store";
 import Link from "next/link";
 // import Link from "next/link";
 import { use } from "react";

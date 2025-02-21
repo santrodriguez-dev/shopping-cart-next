@@ -1,15 +1,6 @@
-import { ProductCartItem } from "@/interfaces/Cart";
 import { ProductItem } from "@/interfaces/Product";
-
-type CartState = {
-  products: ProductCartItem[]
-  savings: number
-}
-
-const cartInitialState: CartState = {
-  products: [],
-  savings: 0
-}
+import { CartState } from "../cart-store";
+import { ProductCartItem } from "@/interfaces/Cart";
 
 enum CartActionsTypesEnum {
   ADD_PRODUCT = 'ADD_PRODUCT',
@@ -17,6 +8,7 @@ enum CartActionsTypesEnum {
   REMOVE_PRODUCT = 'REMOVE_PRODUCT',
   CLEAR_CART = 'CLEAR_CART',
   CHANGE_PRODUCT_QUANTITY = 'CHANGE_PRODUCT_QUANTITY',
+  SET_CART = 'SET_CART',
 }
 
 
@@ -40,7 +32,12 @@ interface AddProductQuantityAction {
   payload: { quantityToAdd: number, productId: number }
 }
 
-type CartActions = AddProductAction | RemoveProductAction | ClearCartAction | AddProductQuantityAction
+interface SetCartAction {
+  type: CartActionsTypesEnum.SET_CART
+  payload: ProductCartItem[]
+}
+
+type CartActions = AddProductAction | RemoveProductAction | ClearCartAction | AddProductQuantityAction | SetCartAction
 
 function cartReducer(state: CartState, action: CartActions): CartState {
   const { type, payload } = action;
@@ -59,7 +56,14 @@ function cartReducer(state: CartState, action: CartActions): CartState {
       }
       return {
         ...state,
-        products: [...state.products, { ...payload, quantity: 1 }]
+        products: [...state.products, {
+          id: payload.id,
+          title: payload.title,
+          price: payload.price,
+          image: payload.images.at(0),
+          description: payload.description,
+          quantity: 1
+        }]
       }
     }
 
@@ -84,7 +88,6 @@ function cartReducer(state: CartState, action: CartActions): CartState {
         }
       }
 
-
       const resultProducts = state.products.with(productIdx, { ...originalProduct, quantity: Math.min(newQuantity, 20) })
       return {
         ...state,
@@ -96,9 +99,15 @@ function cartReducer(state: CartState, action: CartActions): CartState {
         ...state,
         products: []
       }
+
+    case CartActionsTypesEnum.SET_CART:
+      return {
+        ...state,
+        products: payload
+      }
     default:
       return state;
   }
 }
 
-export { cartInitialState, cartReducer, CartActionsTypesEnum }
+export { cartReducer, CartActionsTypesEnum }
