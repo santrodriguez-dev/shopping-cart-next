@@ -17,21 +17,8 @@ export const NavBar = () => {
 
           <div className="flex items-center space-x-8">
             <div className="shrink-0">
-              <Link href={'/'}>
-                <Image
-                  src={'https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full.svg'}
-                  alt="logo"
-                  width={150}
-                  height={35}
-                  className="block w-auto h-8 dark:hidden"
-                />
-                <Image
-                  src={'https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full-dark.svg'}
-                  alt="logo"
-                  width={150}
-                  height={35}
-                  className="hidden w-auto h-8 dark:block"
-                />
+              <Link href={'/'} className="text-lg font-bold">
+                <h2>ONE STOP SHOP</h2>
               </Link>
             </div>
 

@@ -14,12 +14,21 @@ export type CartState = {
   addProductQuantity: (productId: number, quantityToAdd: number) => void
 }
 
+const getCartFromLocalStorage = () => {
+  const cart = localStorage.getItem('cart')
+  return JSON.parse(cart || '[]')
+}
+
+const updateCartLocalStorage = (products: ProductCartItem[]) => {
+  localStorage.setItem('cart', JSON.stringify(products))
+}
+
 const cartInitialState: CartState = {
   addProduct: () => { },
   removeProduct: () => { },
   clearCart: () => { },
   addProductQuantity: () => { },
-  products: [],
+  products: getCartFromLocalStorage(),
   savings: 2
 }
 
@@ -30,19 +39,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, cartInitialState)
   const { products, savings } = state
 
-  useEffect(() => {
-    const cart = localStorage.getItem('cart')
-    const parsedCart = JSON.parse(cart || '[]')
-    if (parsedCart.length > 0) {
-      dispatch({ type: CartActionsTypesEnum.SET_CART, payload: parsedCart })
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.products))
-  }, [products])
-
-
+  useEffect(() => updateCartLocalStorage(products), [products])
 
   const addProduct = (product: ProductItem) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT, payload: product })
@@ -53,6 +50,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const clearCart = () => {
+    if (products.length === 0) return
     dispatch({ type: CartActionsTypesEnum.CLEAR_CART, payload: null })
   }
 
