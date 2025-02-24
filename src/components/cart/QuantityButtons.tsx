@@ -4,7 +4,7 @@ import { use } from "react"
 
 export const QuantityButtons = ({ id, quantity, className }: { quantity: number, id: number, className?: string }) => {
 
-  const { addProductQuantity, products: cartProducts } = use(CartContext)
+  const { addProductQuantity } = use(CartContext)
 
   return (
     <div className={clsx('flex items-center', className)}>
@@ -21,7 +21,7 @@ export const QuantityButtons = ({ id, quantity, className }: { quantity: number,
         value={quantity}
         type="text"
         id="counter-input"
-        className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" required />
+        className="w-6 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white" placeholder="" required />
       <button
         onClick={() => addProductQuantity(id, +1)}
         type="button"

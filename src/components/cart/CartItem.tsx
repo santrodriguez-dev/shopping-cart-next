@@ -7,8 +7,7 @@ import { QuantityButtons } from "./QuantityButtons"
 
 export const CartItem = ({ product }: { product: ProductCartItem }) => {
 
-  const { removeProduct } = use(CartContext);
-
+  const { removeProduct } = use(CartContext)
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">

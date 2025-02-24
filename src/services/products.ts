@@ -22,6 +22,4 @@ const getProductById = (id: string): Promise<ProductItem> => {
     })
 }
 
-
-
 export { getAllProducts, getProductById, getProductsByCategory }

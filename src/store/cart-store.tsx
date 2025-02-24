@@ -1,7 +1,7 @@
 'use client'
 
 import { ProductItem } from "@/interfaces/Product";
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useMemo, useReducer } from "react";
 import { cartReducer, CartActionsTypesEnum } from "@/store/reducers/cart";
 import { ProductCartItem } from "@/interfaces/Cart";
 
@@ -12,7 +12,7 @@ export type CartState = {
   removeProduct: (productId: number) => void
   clearCart: () => void
   addProductQuantity: (productId: number, quantityToAdd: number) => void
-  getTotalItems: () => number
+  totalItems: number
   getProductById: (productId: number) => ProductCartItem | undefined
 }
 
@@ -31,7 +31,7 @@ const cartInitialState: CartState = {
   removeProduct: () => { },
   clearCart: () => { },
   addProductQuantity: () => { },
-  getTotalItems: () => 0,
+  totalItems: 0,
   getProductById: () => undefined,
   products: getCartFromLocalStorage(),
   savings: 2
@@ -63,7 +63,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT_QUANTITY, payload: { quantityToAdd, productId } })
   }
 
-  const getTotalItems = () => products.reduce((acc, product) => acc + product.quantity, 0)
+  const totalItems = useMemo(() => products.reduce((acc, product) => acc + product.quantity, 0), [products])
 
   const getProductById = (productId: number) => {
     return products.find(product => product.id === productId)
@@ -78,7 +78,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       clearCart,
       products,
       addProductQuantity,
-      getTotalItems,
+      totalItems,
       getProductById
     }}>
       {children}

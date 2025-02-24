@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
-interface State {
+interface UIState {
   isSideMenuOpen: boolean
   toggleSideMenu: () => void
 }
 
-const useUIStore = create<State>((set) => ({
+const useUIStore = create<UIState>((set) => ({
   isSideMenuOpen: false,
-  toggleSideMenu: () => set((state: State) => ({ isSideMenuOpen: !state.isSideMenuOpen })),
+  toggleSideMenu: () => set((state: UIState) => ({ isSideMenuOpen: !state.isSideMenuOpen })),
 }))
 
 export { useUIStore }

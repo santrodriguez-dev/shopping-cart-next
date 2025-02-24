@@ -3,7 +3,7 @@
 import { type ProductItem } from "@/interfaces/Product"
 import Image from "next/image"
 import Link from "next/link"
-import { createContext, ReactElement, use, useState } from "react"
+import { createContext, ReactElement, use, useLayoutEffect, useState } from "react"
 import { CartContext } from "@/store"
 import { QuantityButtons } from "../cart/QuantityButtons"
 
@@ -111,13 +111,20 @@ export const ProductCardRating = () => {
 export const ProductCardPrice = () => {
   const { addProduct, getProductById, removeProduct } = use(CartContext)
   const { product } = use(ProductCardContext)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useLayoutEffect(() => setIsLoaded(true), [])
+
+  if (!isLoaded) {
+    return <p>Loading...</p>
+  }
 
   const productCart = getProductById(product.id)
 
   return (
-    <div className="mt-4 flex items-center justify-between gap-4">
+    <>
       {!productCart && (
-        <>
+        <div className="mt-4 flex items-center justify-between gap-1">
           <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">${product.price}</p>
           <button type="button" className="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             onClick={() => addProduct(product)}>
@@ -126,11 +133,11 @@ export const ProductCardPrice = () => {
             </svg>
             Add to cart
           </button>
-        </>
+        </div>
       )}
 
       {productCart && (
-        <div className="w-full flex justify-between items-center gap-4">
+        <div className="mt-4 flex items-center justify-between gap-1">
           <button
             onClick={() => removeProduct(product.id)}
             type="button"
@@ -141,7 +148,7 @@ export const ProductCardPrice = () => {
           <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">${product.price}</p>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

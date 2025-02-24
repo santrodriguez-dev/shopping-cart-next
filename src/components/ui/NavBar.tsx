@@ -10,9 +10,8 @@ export const NavBar = () => {
 
   const [isLoaded, setIsLoaded] = useState(false)
   const toggleSideMenu = useUIStore(state => state.toggleSideMenu)
-  useEffect(() => {
-    setIsLoaded(true)
-  }, [])
+
+  useEffect(() => setIsLoaded(true), [])
 
   return (
     <nav className="bg-white dark:bg-gray-800 antialiased">
@@ -25,7 +24,6 @@ export const NavBar = () => {
                 <h2>ONE STOP SHOP</h2>
               </Link>
             </div>
-
           </div>
 
           <ul className="hidden lg:flex items-center justify-start gap-6 md:gap-8 py-3 sm:justify-center">
@@ -40,8 +38,7 @@ export const NavBar = () => {
 
           <div className="flex items-center lg:space-x-2">
             {isLoaded && <MyCartNavBarButton />}
-
-            <button onClick={toggleSideMenu} id="userDropdownButton1" data-dropdown-toggle="userDropdown1" type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
+            <button onClick={toggleSideMenu} data-dropdown-toggle="menu-button" type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
               <svg className="w-5 h-5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" strokeWidth="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
