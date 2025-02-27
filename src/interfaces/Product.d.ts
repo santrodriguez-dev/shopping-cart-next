@@ -2,19 +2,21 @@ export interface ProductItem {
   id: number;
   title: string;
   price: number;
+  slug?: string;
   description: string;
   images: string[];
-  creationAt: Date;
-  updatedAt: Date;
+  creationAt: string;
+  updatedAt: string;
   category: Category;
 }
 
 export interface Category {
   id: number;
-  name: CategoryEnum;
+  name: CategoryEnum | string;
+  slug?: string;
   image: string;
-  creationAt: Date;
-  updatedAt: Date;
+  creationAt: string;
+  updatedAt: string;
 }
 
 export enum CategoryEnum {

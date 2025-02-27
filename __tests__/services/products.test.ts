@@ -3,7 +3,7 @@ import { describe } from "node:test";
 import { expect, test } from "vitest";
 
 describe('getProductsByCategory', () => {
-  test('should return an array of products', async () => {
+  test('should return array of products', async () => {
     const categoryId = 1
     const products = await getProductsByCategory(categoryId)
     expect(products.length).toBeGreaterThan(0)

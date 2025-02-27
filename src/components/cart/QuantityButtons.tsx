@@ -7,7 +7,7 @@ export const QuantityButtons = ({ id, quantity, className }: { quantity: number,
   const { addProductQuantity } = use(CartContext)
 
   return (
-    <div className={clsx('flex items-center', className)}>
+    <div className={clsx('', className)}>
       <button
         onClick={() => addProductQuantity(id, -1)}
         type="button"
@@ -18,6 +18,7 @@ export const QuantityButtons = ({ id, quantity, className }: { quantity: number,
         </svg>
       </button>
       <input readOnly
+        data-testid="counter-input"
         value={quantity}
         type="text"
         id="counter-input"

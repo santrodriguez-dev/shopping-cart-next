@@ -16,9 +16,11 @@ const MyCartNavBarButton = () => {
       </svg>
       <span className="hidden sm:flex">My Cart</span>
       {totalItems ?
-        <div className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+        <span
+          data-testid="cart-quantity"
+          className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
           {totalItems}
-        </div>
+        </span>
         : null}
     </Link>
   )

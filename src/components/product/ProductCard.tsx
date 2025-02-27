@@ -17,7 +17,9 @@ const { Provider } = ProductCardContext
 const ProductCardCompoundComponent = ({ children, product }: { product: ProductItem, children?: ReactElement | ReactElement[] | string }) => {
   return (
     <Provider value={{ product }}>
-      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <div
+        data-testid="product-test"
+        className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         {children}
       </div>
     </Provider>
@@ -137,15 +139,15 @@ export const ProductCardPrice = () => {
       )}
 
       {productCart && (
-        <div className="mt-4 flex items-center justify-between gap-1">
+        <div className="mt-4">
+          <QuantityButtons id={product.id} quantity={productCart.quantity} className="inline mr-2" />
           <button
             onClick={() => removeProduct(product.id)}
             type="button"
             className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
             Remove from cart
           </button>
-          <QuantityButtons id={product.id} quantity={productCart.quantity} />
-          <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">${product.price}</p>
+          {/* <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white tex">${product.price}</p> */}
         </div>
       )}
     </>

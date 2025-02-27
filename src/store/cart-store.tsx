@@ -4,6 +4,7 @@ import { ProductItem } from "@/interfaces/Product";
 import { createContext, useEffect, useMemo, useReducer } from "react";
 import { cartReducer, CartActionsTypesEnum } from "@/store/reducers/cart";
 import { ProductCartItem } from "@/interfaces/Cart";
+import { getTotalProducts } from "@/utils/cart";
 
 export type CartState = {
   savings: number
@@ -39,9 +40,9 @@ const cartInitialState: CartState = {
 
 const CartContext = createContext<CartState>(cartInitialState);
 
-const CartProvider = ({ children }: { children: React.ReactNode }) => {
+const CartProvider = ({ children, store }: { children: React.ReactNode, store?: CartState }) => {
 
-  const [state, dispatch] = useReducer(cartReducer, cartInitialState)
+  const [state, dispatch] = useReducer(cartReducer, store ?? cartInitialState)
   const { products, savings } = state
 
   useEffect(() => updateCartLocalStorage(products), [products])
@@ -63,7 +64,6 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: CartActionsTypesEnum.ADD_PRODUCT_QUANTITY, payload: { quantityToAdd, productId } })
   }
 
-  const totalItems = useMemo(() => products.reduce((acc, product) => acc + product.quantity, 0), [products])
 
   const getProductById = (productId: number) => {
     return products.find(product => product.id === productId)
@@ -78,7 +78,9 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       clearCart,
       products,
       addProductQuantity,
-      totalItems,
+      get totalItems() {
+        return getTotalProducts(products)
+      },
       getProductById
     }}>
       {children}

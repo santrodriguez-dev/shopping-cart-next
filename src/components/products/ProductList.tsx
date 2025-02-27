@@ -1,7 +1,7 @@
 'use client'
 
-import { ProductCard } from "./ProductCard"
 import { ProductItem } from "@/interfaces/Product"
+import { ProductCard } from ".."
 
 export const ProductList = ({ products }: { products: ProductItem[] }) => {
 

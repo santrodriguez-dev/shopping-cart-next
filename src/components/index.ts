@@ -7,7 +7,7 @@ export * from './cart/RelatedProducts';
 export * from './cart/VoucherForm';
 export * from './product/ProductCard';
 export * from './product/ProductDetail';
-export * from './product/ProductList';
+export * from './products/ProductList';
 export * from './ui/Footer';
 export * from './ui/NavBar';
 export * from './ui/Sidebar';

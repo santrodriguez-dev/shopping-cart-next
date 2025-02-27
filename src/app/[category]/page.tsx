@@ -1,4 +1,4 @@
-import { Breadcrumbs, ProductCard, ProductCardTitle, ProductList } from "@/components"
+import { Breadcrumbs, ProductList } from "@/components"
 import { SHOP_CATEGORIES_ID_MAP } from "@/constants"
 import { getProductsByCategory } from "@/services"
 import { notFound } from "next/navigation"
