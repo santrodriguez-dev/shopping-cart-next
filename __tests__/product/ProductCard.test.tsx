@@ -1,9 +1,10 @@
 import { ProductCard, ProductList } from "@/components";
 import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
-import { beforeAll, describe, expect, test } from "vitest";
+import { beforeAll, describe, expect, test, vi } from "vitest";
 import { mockCartProducts, mockProducts } from "../mocks/products";
 import { beforeEach } from "node:test";
 import { CartProvider, CartState } from "@/store";
+import { act } from "react";
 
 describe('<ProductCard/>', () => {
 
@@ -26,18 +27,9 @@ describe('<ProductCard/>', () => {
   })
 
   test('Should add product to cart on add to cart button', () => {
-    const cartInitialState: CartState = {
-      addProduct: () => { },
-      removeProduct: () => { },
-      clearCart: () => { },
-      addProductQuantity: () => { },
-      totalItems: 0,
-      getProductById: () => undefined,
-      products: [],
-      savings: 2
-    }
+
     render(
-      <CartProvider store={cartInitialState}>
+      <CartProvider>
         <ProductCard
           product={mockProducts[1]}>
           <ProductCard.Image />
@@ -50,7 +42,9 @@ describe('<ProductCard/>', () => {
       </CartProvider>)
 
     const addToCartElement = screen.getByText(/^Add to cart$/)
-    fireEvent.click(addToCartElement)
+    act(() => {
+      fireEvent.click(addToCartElement)
+    })
 
     expect(screen.getByText(/^Remove from cart$/)).toBeDefined()
     const counterElement = screen.getByTestId('counter-input') as HTMLInputElement

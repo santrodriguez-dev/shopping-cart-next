@@ -12,11 +12,10 @@ export const CartItem = ({ product }: { product: ProductCartItem }) => {
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-        <Link href={'/'} className="shrink-0 md:order-1">
+        <Link href={`/product/${product.id}`} className="shrink-0 md:order-1">
           <Image src={product.image!} width={80} height={80} alt={product.title} />
         </Link>
 
-        <label htmlFor="counter-input" className="sr-only">Choose quantity:</label>
         <div className="flex items-center justify-between md:order-3 md:justify-end">
           <QuantityButtons id={product.id} quantity={product.quantity} />
           <div className="text-end md:order-4 md:w-32">
@@ -25,7 +24,7 @@ export const CartItem = ({ product }: { product: ProductCartItem }) => {
         </div>
 
         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-          <a href="#" className="text-base font-medium text-gray-900 hover:underline dark:text-white">{product.title}</a>
+          <Link href={`/product/${product.id}`} className="text-base font-medium text-gray-900 hover:underline dark:text-white">{product.title}</Link>
 
           <div className="flex items-center gap-4">
             <button type="button" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
